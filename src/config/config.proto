@@ -1,0 +1,26 @@
+package athena.config;
+
+message Config {
+    optional bool   debug_time              = 1;
+    optional string work_road_map           = 2;
+    optional string goback_road_map         = 3;
+    optional string start_road_map          = 4;
+    optional string version                 = 5;
+    optional string name_id                 = 6;
+    optional string data_file               = 7;
+    optional bool   localization_enable     = 8;
+    optional bool   system_error            = 9;
+
+    optional double hmi_zoomout             = 10;
+    optional int32  uwb_node_mode           = 18;
+    optional bool   uwb_node_frame          = 11;
+    optional double uwb_safety_max_m        = 12;
+    optional double uwb_safety_min_m        = 13;
+    optional double uwb_safety_run_speed    = 14;
+    optional double uwb_safety_run_time     = 15;
+    optional double uwb_safety_run_stop     = 16;
+
+
+    optional double speed_limit             = 17;
+
+}

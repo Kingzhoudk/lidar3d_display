@@ -1,0 +1,35 @@
+# 是否开启debug
+debug_time              : true
+
+localization_enable     : true
+
+# 系统是否出现错误
+system_error            : false
+
+# 地图文件路径
+start_road_map          : "/home/bill/data/Mode1/start_map.txt"
+work_road_map           : "/home/bill/data/Mode1/work_map.txt"
+goback_road_map         : "/home/bill/data/Mode1/goback_map.txt"
+
+# 永久保存数据文件
+data_file               : "/home/bill/data/data_file.txt"
+
+# 版本号和id
+version                 : "Test_V4.1.4"
+name_id                 : "002"
+
+# 图像显示放大倍数
+hmi_zoomout             : 0.1
+
+# 是否使用UWB测距触发功能,uwb_safety_*_m触发距离min<x<max;run_*冲出的速度、时间、冲出后暂停stop 秒;
+# 冲出的距离run_speed * 1/70 * run_time , node_mode:1为冲出，2为跟随
+uwb_node_frame          : false
+uwb_node_mode           : 1
+uwb_safety_max_m        : 9.0
+uwb_safety_min_m        : 8.0
+uwb_safety_run_speed    : 90
+uwb_safety_run_time     : 12.0
+uwb_safety_run_stop     : 20
+
+# 限定行驶的最大速度
+speed_limit             : 100
