@@ -1,7 +1,6 @@
 //
 // Created by bill on 2020/5/2.
 //
-
 #ifndef LIDAR3D_LIDAR3D_H
 #define LIDAR3D_LIDAR3D_H
 
@@ -22,43 +21,64 @@
 
 #include <pangolin/pangolin.h>
 #include <eigen3/Eigen/Dense>
+#include <eigen3/Eigen/Core>
+#include <eigen3/Eigen/Geometry>
+#include <pcl-1.11/pcl/point_cloud.h>
+#include <pcl-1.11/pcl/point_types.h>
+#include <pcl/filters/statistical_outlier_removal.h>
 
 #include "api.h"
 
-struct Lidar3d_data{
-    double id;
-    int distance[9600][3];
-    double lidar_left_distance;
-    double lidar_right_distance;
+using namespace Eigen;
+
+double get_machine_timestamp_s();
+
+struct Lidar_hps_data{
+    int lidar_1_id,lidar_2_id;
+    double time_stamp;
+    double lidar_data_2[9600][3];
+    double lidar_data_1[9600][3];
 };
 
-int lidar3d_plan(Lidar3d_data data,int width,int height,double Ob_distance);
+struct Cloud_Filtered_data{
+    int size_t;
+    double time_stamp;
+    double cloud_[18000][3];
+};
 
 class Lidar3d{
 public:
     Lidar3d(){};
     ~Lidar3d() = default;
 
+    double installation_heght = 300 ;
+
     bool init(){
-        std::cout << "lidar read thread begin" << std::endl;
+        std::cout << "HPS3D lidar read thread begin" << std::endl;
         lidar_thread_ = std::thread(&Lidar3d::lidar_thread_func, this);
+
+        compute_thread_= std::thread(&Lidar3d::compute_func, this);
+
+        display_thread_=std::thread(&Lidar3d::display_func,this);
         return true;
     }
 
 public:
+    std::atomic<Lidar_hps_data> hps_data;
+    std::atomic<Cloud_Filtered_data> cloud_filtered_data;
+
+private:
     HPS3D_HandleTypeDef handle_lidar3d[DEV_NUM];
     uint8_t connect_number = 0;
 
-    Lidar3d_data mydata;
-
-private:
     std::thread lidar_thread_;
     bool lidar_thread_func();
 
-private:
-    std::thread display_thread_;
-    bool display_thread_func();
-};
+    std::thread compute_thread_;
+    bool compute_func();
 
+    std::thread display_thread_;
+    bool display_func();
+};
 
 #endif //LIDAR3D_LIDAR3D_H

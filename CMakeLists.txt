@@ -14,19 +14,24 @@ find_package(Glog REQUIRED)
 find_package(GFlags REQUIRED)
 find_package(Protobuf REQUIRED)
 
+find_package(PCL REQUIRED)
+include_directories(PCL_INCLUDE_DIRS)
+link_directories(${PCL_LIBRARY_DIRS})
+
 
 set(PROTO_FILES
         src/config/config.proto)
 
 PROTOBUF_GENERATE_CPP(PROTO_SRC PROTO_HDR ${PROTO_FILES})
 
+
 add_executable(lidar3d
         src/lidar3d_data/api.h
         src/lidar3d_data/lidar3d.h src/lidar3d_data/lidar3d.cpp
-        main.cpp
-        src/display/display.cpp src/display/display.h)
+        main.cpp src/system/display.cpp src/system/display.h)
 
 target_link_libraries(lidar3d
+        atomic
         glog
         gflags
         ${OpenCV_LIBS}
@@ -36,3 +41,4 @@ target_link_libraries(lidar3d
         )
 
 target_link_libraries(lidar3d hps3d64.so) # 显示指定链接动态库
+target_link_libraries(lidar3d ${PCL_LIBRARIES})
