@@ -36,14 +36,15 @@ double get_machine_timestamp_s();
 struct Lidar_hps_data{
     int lidar_1_id,lidar_2_id;
     double time_stamp;
-    double lidar_data_2[9600][3];
-    double lidar_data_1[9600][3];
+    int lidar_data_2[9600][3];
+    int lidar_data_1[9600][3];
 };
 
 struct Cloud_Filtered_data{
     int size_t;
     double time_stamp;
-    double cloud_[18000][3];
+    int cloud_3d[19200][3];
+    int cloud_2d[19200][2];
 };
 
 class Lidar3d{
@@ -53,15 +54,7 @@ public:
 
     double installation_heght = 300 ;
 
-    bool init(){
-        std::cout << "HPS3D lidar read thread begin" << std::endl;
-        lidar_thread_ = std::thread(&Lidar3d::lidar_thread_func, this);
-
-        compute_thread_= std::thread(&Lidar3d::compute_func, this);
-
-        display_thread_=std::thread(&Lidar3d::display_func,this);
-        return true;
-    }
+    bool init();
 
 public:
     std::atomic<Lidar_hps_data> hps_data;

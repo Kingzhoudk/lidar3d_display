@@ -1,0 +1,91 @@
+/home/uisee/Downloads/clion-2020.1.2/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/uisee/Desktop/lidar3d_display
+-- The C compiler identification is GNU 5.4.0
+-- The CXX compiler identification is GNU 5.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found glog    (include: /usr/include, library: /usr/lib/x86_64-linux-gnu/libglog.so)
+-- Found gflags  (include: /usr/include, library: /usr/lib/x86_64-linux-gnu/libgflags.so)
+-- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found version "2.6.1") 
+-- Checking for module 'eigen3'
+--   Found eigen3, version 3.3.7
+-- Eigen found (include: /usr/local/include/eigen3, version: 3.3.7)
+-- Found Boost: /usr/include (found suitable version "1.58.0", minimum required is "1.55.0") found components: system filesystem date_time iostreams serialization regex 
+-- Checking for module 'flann'
+--   Found flann, version 1.8.4
+CMake Warning at /usr/share/pcl-1.11/PCLConfig.cmake:271 (find_package):
+  By not providing "FindVTK.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "VTK", but
+  CMake did not find one.
+
+  Could not find a package configuration file provided by "VTK" with any of
+  the following names:
+
+    VTKConfig.cmake
+    vtk-config.cmake
+
+  Add the installation prefix of "VTK" to CMAKE_PREFIX_PATH or set "VTK_DIR"
+  to a directory containing one of the above files.  If "VTK" provides a
+  separate development package or SDK, be sure it has been installed.
+Call Stack (most recent call first):
+  /usr/share/pcl-1.11/PCLConfig.cmake:330 (find_VTK)
+  /usr/share/pcl-1.11/PCLConfig.cmake:535 (find_external_library)
+  CMakeLists.txt:17 (find_package)
+
+
+** WARNING ** 2d features related to vtk will be disabled
+** WARNING ** io features related to pcap will be disabled
+** WARNING ** io features related to png will be disabled
+CMake Warning at /usr/share/pcl-1.11/PCLConfig.cmake:271 (find_package):
+  By not providing "FindVTK.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "VTK", but
+  CMake did not find one.
+
+  Could not find a package configuration file provided by "VTK" with any of
+  the following names:
+
+    VTKConfig.cmake
+    vtk-config.cmake
+
+  Add the installation prefix of "VTK" to CMAKE_PREFIX_PATH or set "VTK_DIR"
+  to a directory containing one of the above files.  If "VTK" provides a
+  separate development package or SDK, be sure it has been installed.
+Call Stack (most recent call first):
+  /usr/share/pcl-1.11/PCLConfig.cmake:330 (find_VTK)
+  /usr/share/pcl-1.11/PCLConfig.cmake:535 (find_external_library)
+  CMakeLists.txt:17 (find_package)
+
+
+** WARNING ** io features related to vtk will be disabled
+** WARNING ** io features related to libusb-1.0 will be disabled
+-- QHULL found (include: /usr/include, lib: optimized;/usr/lib/x86_64-linux-gnu/libqhull.so;debug;/usr/lib/x86_64-linux-gnu/libqhull.so)
+-- looking for PCL_COMMON
+-- looking for PCL_GEOMETRY
+-- looking for PCL_KDTREE
+-- looking for PCL_OCTREE
+-- looking for PCL_SEARCH
+-- looking for PCL_SAMPLE_CONSENSUS
+-- looking for PCL_FILTERS
+-- looking for PCL_2D
+-- looking for PCL_FEATURES
+-- looking for PCL_ML
+-- looking for PCL_SEGMENTATION
+-- looking for PCL_IO
+-- looking for PCL_SURFACE
+-- looking for PCL_REGISTRATION
+-- looking for PCL_RECOGNITION
+-- looking for PCL_KEYPOINTS
+-- looking for PCL_TRACKING
+-- looking for PCL_STEREO
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/uisee/Desktop/lidar3d_display/cmake-build-debug

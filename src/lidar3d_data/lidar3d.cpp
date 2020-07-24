@@ -14,11 +14,20 @@ double get_machine_timestamp_s() {
     return (static_cast<double>(timestamp)) / 1000000.0;
 }
 
+bool Lidar3d::init() {
+    std::cout << "HPS3D lidar read thread begin" << std::endl;
+    lidar_thread_ = std::thread(&Lidar3d::lidar_thread_func, this);
+
+    compute_thread_= std::thread(&Lidar3d::compute_func, this);
+
+    display_thread_=std::thread(&Lidar3d::display_func,this);
+    return true;
+}
+
 bool Lidar3d::lidar_thread_func() {
     uint32_t a = 0;
     /*Init Device*/
-    do
-    {
+    do{
         // 设置测量包类型
         HPS3D_SetMeasurePacketType(ROI_DATA_PACKET);
 
@@ -28,17 +37,14 @@ bool Lidar3d::lidar_thread_func() {
             printf("error,connect_number = %d\n",connect_number);
             return false;
         }
-
         // 开启边缘滤波
         HPS3D_SetEdgeDetectionEnable (true);
         HPS3D_GetEdgeDetectionEnable ();
         HPS3D_SetEdgeDetectionValue (1000);
         HPS3D_GetEdgeDetectionValue();
-
         // 获取点云数据
         HPS3D_SetPointCloudEn(true);
         HPS3D_GetPointCloudEn();
-
 
         for(int i = 0;i<connect_number;i++){
             //设定偏移，距离差0cm
@@ -83,21 +89,15 @@ bool Lidar3d::lidar_thread_func() {
 }
 
 bool Lidar3d::compute_func() {
-    Lidar_hps_data my_data;
+    Lidar_hps_data my_hps;
     Cloud_Filtered_data my_cloud;
-    //*****************************************
-    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
-    pcl::PointXYZ point_pcl;
-    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered(new pcl::PointCloud<pcl::PointXYZ>);
-    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered_1(new pcl::PointCloud<pcl::PointXYZ>);
-    //*****************************************
     // AngleAxisd 旋转向量，沿y轴逆时针旋转38度
     AngleAxisd rotation_vector_1(0.6632251,Vector3d(0,-1,0));
     // AngleAxisd 旋转向量，沿y轴顺时针旋转38度
     AngleAxisd rotation_vector_2(0.6632251,Vector3d(0,1,0));
 
-    Vector3d point_v;
-    Vector3d point_v_ro;
+    Vector3d point_v,point_v_ro,point_cloud;
+    std::vector<Vector3d > cloud_;
     int a=1;
 
     sleep(6);
@@ -108,45 +108,42 @@ bool Lidar3d::compute_func() {
         std::cout.setf(std::ios::fixed, std::ios::floatfield);
         std::cout << "now_time:" << time_stamp << "\n";
          */
-        my_data=hps_data.load(std::memory_order_relaxed);
-        cloud->clear();
-        cloud_filtered->clear();
-        cloud_filtered_1->clear();
+        my_hps=hps_data.load(std::memory_order_relaxed);
+        int cout=0;
         for(int i=0;i<9600;i++){
-            point_v.x()=my_data.lidar_data_1[i][0];
-            point_v.y()=my_data.lidar_data_1[i][1];
-            point_v.z()=my_data.lidar_data_1[i][2];
+            point_v.x()=my_hps.lidar_data_1[i][0];
+            point_v.y()=my_hps.lidar_data_1[i][1];
+            point_v.z()=my_hps.lidar_data_1[i][2];
             point_v_ro=rotation_vector_1*point_v;
             // point_v.y()<installation_heght 去除地面
             if(point_v.z()>=250 && point_v.z()<40000 && point_v.y()< installation_heght) {
-                point_pcl.x=point_v_ro.x();point_pcl.y=point_v_ro.y();point_pcl.z=point_v_ro.z();
-                cloud->points.push_back(point_pcl);
+                // 3d
+                my_cloud.cloud_3d[cout][0]=point_v_ro.x();
+                my_cloud.cloud_3d[cout][1]=point_v_ro.y();
+                my_cloud.cloud_3d[cout][2]=point_v_ro.z();
+                //
+                my_cloud.cloud_2d[cout][0]=point_v_ro.x();
+                my_cloud.cloud_2d[cout][1]=point_v_ro.z();
+                cout++;
             }
-            point_v.x()=my_data.lidar_data_2[i][0];
-            point_v.y()=my_data.lidar_data_2[i][1];
-            point_v.z()=my_data.lidar_data_2[i][2];
+            point_v.x()=my_hps.lidar_data_2[i][0];
+            point_v.y()=my_hps.lidar_data_2[i][1];
+            point_v.z()=my_hps.lidar_data_2[i][2];
             point_v_ro=rotation_vector_2*point_v;
+            // point_v.y()<installation_heght 去除地面
             if(point_v.z()>=250 && point_v.z()<40000 && point_v.y()< installation_heght) {
-                point_pcl.x=point_v_ro.x();point_pcl.y=point_v_ro.y();point_pcl.z=point_v_ro.z();
-                cloud->points.push_back(point_pcl);
+                // 3d
+                my_cloud.cloud_3d[cout][0]=point_v_ro.x();
+                my_cloud.cloud_3d[cout][1]=point_v_ro.y();
+                my_cloud.cloud_3d[cout][2]=point_v_ro.z();
+                //
+                my_cloud.cloud_2d[cout][0]=point_v_ro.x();
+                my_cloud.cloud_2d[cout][1]=point_v_ro.z();
+                cout++;
             }
         }
-
-        // 滤波器滤除离群点
-        pcl::StatisticalOutlierRemoval<pcl::PointXYZ> sor;
-        sor.setInputCloud (cloud);                           //设置待滤波的点云
-        sor.setMeanK (20);                               //设置在进行统计时考虑的临近点个数
-        sor.setStddevMulThresh (1.0);                      //设置判断是否为离群点的阀值，用来倍乘标准差
-        sor.filter (*cloud_filtered);
-        // ******************
-
-        for(int i=0;i<=cloud_filtered->size();i++){
-            my_cloud.cloud_[i][0]=cloud_filtered->points[i].x;
-            my_cloud.cloud_[i][1]=cloud_filtered->points[i].y;
-            my_cloud.cloud_[i][2]=cloud_filtered->points[i].z;
-        }
-        my_cloud.size_t=cloud_filtered->size();
-        my_cloud.time_stamp = my_data.time_stamp;
+        my_cloud.size_t=cout;
+        my_cloud.time_stamp = my_hps.time_stamp;
         cloud_filtered_data.store(my_cloud, std::memory_order_relaxed);
     }
     return false;
@@ -198,22 +195,22 @@ bool Lidar3d::display_func() {
             for (int i = 0; i < my_cloud.size_t ; i++) {
                 // 画map
                 double red,green,blue;
-                red=1-my_cloud.cloud_[i][0]*0.0003;
+                red=1-my_cloud.cloud_3d[i][0]*0.0003;
                 if(red<0){
                     red=0;
                 }
-                green=1-my_cloud.cloud_[i][1]*0.001;
+                green=1-my_cloud.cloud_3d[i][1]*0.001;
                 if(green<0){
                     green=0;
                 }
-                blue=1-my_cloud.cloud_[i][2]*0.00003;
+                blue=1-my_cloud.cloud_3d[i][2]*0.00003;
                 if(blue<0){
                     blue=0;
                 }
                 glColor3f(red, green, blue);
                 glPointSize(5);
                 glBegin(GL_POINTS);
-                glVertex3d(my_cloud.cloud_[i][0]*zoomout ,my_cloud.cloud_[i][1]*zoomout ,my_cloud.cloud_[i][2]*zoomout);
+                glVertex3d(my_cloud.cloud_3d[i][0]*zoomout ,my_cloud.cloud_3d[i][1]*zoomout ,my_cloud.cloud_3d[i][2]*zoomout);
                 // std::cout<<"i:"<<i<<",x:"<<cloud_filtered->points[i].x<<",y:"<<cloud_filtered->points[i].y<<",z:"<<cloud_filtered->points[i].z<<"\n";
             }
 
@@ -222,7 +219,7 @@ bool Lidar3d::display_func() {
                 glColor3f(1, 0, 0);
                 glPointSize(5);
                 glBegin(GL_POINTS);
-                glVertex3d(my_cloud.cloud_[i][0]*zoomout ,5 ,my_cloud.cloud_[i][2]*zoomout);
+                glVertex3d(my_cloud.cloud_2d[i][0]*zoomout ,5 ,my_cloud.cloud_2d[i][1]*zoomout);
                 // std::cout<<"i:"<<i<<",x:"<<cloud_filtered->points[i].x<<",y:"<<cloud_filtered->points[i].y<<",z:"<<cloud_filtered->points[i].z<<"\n";
             }
             glEnd();
@@ -232,4 +229,5 @@ bool Lidar3d::display_func() {
     }
     return false;
 }
+
 

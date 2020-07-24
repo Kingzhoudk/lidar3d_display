@@ -22,7 +22,6 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../PCL_INCLUDE_DIRS"
-  "/usr/local/include"
   "/usr/local/include/opencv"
   "/usr/local/include/eigen3"
   "/usr/include/pcl-1.11"
