@@ -17,10 +17,13 @@ double get_machine_timestamp_s() {
 bool Lidar3d::init() {
     std::cout << "HPS3D lidar read thread begin" << std::endl;
     lidar_thread_ = std::thread(&Lidar3d::lidar_thread_func, this);
+    sleep(5);
 
-    compute_thread_= std::thread(&Lidar3d::compute_func, this);
+    compute_thread_ = std::thread(&Lidar3d::compute_func, this);
 
-    display_thread_=std::thread(&Lidar3d::display_func,this);
+    //barrier_thread_ = std::thread(&Lidar3d::barrier_func,this);
+
+    display_thread_ = std::thread(&Lidar3d::display_func,this);
     return true;
 }
 
@@ -70,9 +73,12 @@ bool Lidar3d::lidar_thread_func() {
     }
 
     while(a==1) {
-        HPS3D_SingleMeasurement(&handle_lidar3d[0]);
-        HPS3D_SingleMeasurement(&handle_lidar3d[1]);
-
+        if(HPS3D_SingleMeasurement(&handle_lidar3d[0]) != RET_OK || HPS3D_SingleMeasurement(&handle_lidar3d[1]) != RET_OK){
+            std::cout<<"error!";
+        }
+        else{
+            std::cout<<"1111!";
+        }
         for (int i = 0; i < 9600; i++) {
             my_data.lidar_data_1[i][0] = handle_lidar3d[my_data.lidar_1_id].MeasureData.point_cloud_data->point_data[i].x;
             my_data.lidar_data_1[i][1] = handle_lidar3d[my_data.lidar_1_id].MeasureData.point_cloud_data->point_data[i].y;
@@ -91,6 +97,7 @@ bool Lidar3d::lidar_thread_func() {
 bool Lidar3d::compute_func() {
     Lidar_hps_data my_hps;
     Cloud_Filtered_data my_cloud;
+    Barrier_data my_barrier;
     // AngleAxisd 旋转向量，沿y轴逆时针旋转38度
     AngleAxisd rotation_vector_1(0.6632251,Vector3d(0,-1,0));
     // AngleAxisd 旋转向量，沿y轴顺时针旋转38度
@@ -100,14 +107,12 @@ bool Lidar3d::compute_func() {
     std::vector<Vector3d > cloud_;
     int a=1;
 
-    sleep(6);
-
     while(a){
-        /*
+
         double time_stamp = get_machine_timestamp_s();
         std::cout.setf(std::ios::fixed, std::ios::floatfield);
         std::cout << "now_time:" << time_stamp << "\n";
-         */
+
         my_hps=hps_data.load(std::memory_order_relaxed);
         int cout=0;
         for(int i=0;i<9600;i++){
@@ -145,6 +150,57 @@ bool Lidar3d::compute_func() {
         my_cloud.size_t=cout;
         my_cloud.time_stamp = my_hps.time_stamp;
         cloud_filtered_data.store(my_cloud, std::memory_order_relaxed);
+
+        // compute barrier
+        int distance[8]={9999,9999,9999,9999,9999,9999,9999,9999},dis_cout[8]={0};
+        my_cloud=cloud_filtered_data.load(std::memory_order_relaxed);
+        for(int i=0;i<my_cloud.size_t;i++){
+            if( my_cloud.cloud_2d[i][0] > -1000&&  my_cloud.cloud_2d[i][0] <= -750){
+                if(distance[7]>my_cloud.cloud_2d[i][1])
+                    distance[7]=my_cloud.cloud_2d[i][1];
+                dis_cout[7]++;
+            }
+            else if( my_cloud.cloud_2d[i][0] > -750 &&  my_cloud.cloud_2d[i][0] <= -500){
+                if(distance[6]>my_cloud.cloud_2d[i][1])
+                    distance[6]=my_cloud.cloud_2d[i][1];
+                dis_cout[6]++;
+            }
+            else if( my_cloud.cloud_2d[i][0] > -500 &&  my_cloud.cloud_2d[i][0] <= -250){
+                if(distance[5]>my_cloud.cloud_2d[i][1])
+                    distance[5]=my_cloud.cloud_2d[i][1];
+                dis_cout[5]++;
+            }
+            else if( my_cloud.cloud_2d[i][0] > -250 &&  my_cloud.cloud_2d[i][0] <= 0){
+                if(distance[4]>my_cloud.cloud_2d[i][1])
+                    distance[4]=my_cloud.cloud_2d[i][1];
+                dis_cout[4]++;
+            }
+            else if( my_cloud.cloud_2d[i][0] > 0    &&  my_cloud.cloud_2d[i][0] <= 250){
+                if(distance[3]>my_cloud.cloud_2d[i][1])
+                    distance[3]=my_cloud.cloud_2d[i][1];
+                dis_cout[3]++;
+            }
+            else if( my_cloud.cloud_2d[i][0] > 250  &&  my_cloud.cloud_2d[i][0] <= 500){
+                if(distance[2]>my_cloud.cloud_2d[i][1])
+                    distance[2]=my_cloud.cloud_2d[i][1];
+                dis_cout[2]++;
+            }
+            else if( my_cloud.cloud_2d[i][0] > 500  &&  my_cloud.cloud_2d[i][0] <= 750){
+                if(distance[1]>my_cloud.cloud_2d[i][1])
+                    distance[1]=my_cloud.cloud_2d[i][1];
+                dis_cout[1]++;
+            }
+            else if( my_cloud.cloud_2d[i][0] > 750  &&  my_cloud.cloud_2d[i][0] <= 1000){
+                if(distance[0]>my_cloud.cloud_2d[i][1])
+                    distance[0]=my_cloud.cloud_2d[i][1];
+                dis_cout[0]++;
+            }
+        }
+        for(int j=0;j<8;j++){
+            my_barrier.barrier[j][0]=distance[j];
+            my_barrier.barrier[j][1]=dis_cout[j];
+        }
+        barrier_data.store(my_barrier,std::memory_order_relaxed);
     }
     return false;
 }
@@ -162,6 +218,7 @@ bool Lidar3d::display_func() {
             pangolin::ModelViewLookAt(0,0,10,0,0,0,pangolin::AxisNegY));
     //在窗口中创建交互式视图
     pangolin::Handler3D handler(s_cam);
+
     pangolin::View &d_cam = pangolin::CreateDisplay()
             .SetBounds(0.0,1.0,0.0,1.0,-640.0f/480.0f)
             .SetHandler(&handler);
@@ -174,23 +231,31 @@ bool Lidar3d::display_func() {
 
     Lidar_hps_data my_data;
     Cloud_Filtered_data my_cloud;
+    Barrier_data my_barrier;
 
     while(a){
+        std::cout<<"start read data"<<"\n";
         my_data=hps_data.load(std::memory_order_relaxed);
         my_cloud=cloud_filtered_data.load(std::memory_order_relaxed);
+        my_barrier=barrier_data.load(std::memory_order_relaxed);
+        std::cout<<"end read data"<<"\n";
 
         double time_stamp = get_machine_timestamp_s() - my_cloud.time_stamp;
         std::cout.setf(std::ios::fixed, std::ios::floatfield);
         std::cout << "now_time:" << time_stamp << "\n";
+
+        for(int i=0;i<8;i++){
+            std::cout << "barrier " << i <<" :"<< my_barrier.barrier[i][0]<< " , " <<my_barrier.barrier[i][1]<< "\n";
+        }
 
         if(display){
             double zoomout=0.002;
             //清除屏幕并激活要渲染到的视图
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             d_cam.Activate(s_cam);
-            pangolin::glDrawColouredCube();//画三维方块
-            //线条长度
-            pangolin::glDrawAxis(2);//三维坐标轴，红——x轴，绿——y轴，蓝——z轴
+            // pangolin::glDrawColouredCube();//画三维方块
+            // 线条长度
+            // pangolin::glDrawAxis(2);//三维坐标轴，红——x轴，绿——y轴，蓝——z轴
 
             for (int i = 0; i < my_cloud.size_t ; i++) {
                 // 画map
@@ -225,6 +290,72 @@ bool Lidar3d::display_func() {
             glEnd();
             //结束
             pangolin::FinishFrame();
+        }
+    }
+    return false;
+}
+
+bool Lidar3d::barrier_func() {
+    Cloud_Filtered_data my_cloud;
+    Barrier_data my_barrier;
+    int a=1;
+    std::chrono::microseconds period(2000*1000);
+    while(a){
+        auto start_time = std::chrono::system_clock::now();
+        int distance[8]={9999,9999,9999,9999,9999,9999,9999,9999},cout[8]={0};
+        my_cloud=cloud_filtered_data.load(std::memory_order_relaxed);
+        for(int i=0;i<my_cloud.size_t;i++){
+            if( my_cloud.cloud_2d[i][0] > -1000&&  my_cloud.cloud_2d[i][0] <= -750){
+                if(distance[7]>my_cloud.cloud_2d[i][1])
+                    distance[7]=my_cloud.cloud_2d[i][1];
+                cout[7]++;
+            }
+            else if( my_cloud.cloud_2d[i][0] > -750 &&  my_cloud.cloud_2d[i][0] <= -500){
+                if(distance[6]>my_cloud.cloud_2d[i][1])
+                    distance[6]=my_cloud.cloud_2d[i][1];
+                cout[6]++;
+            }
+            else if( my_cloud.cloud_2d[i][0] > -500 &&  my_cloud.cloud_2d[i][0] <= -250){
+                if(distance[5]>my_cloud.cloud_2d[i][1])
+                    distance[5]=my_cloud.cloud_2d[i][1];
+                cout[5]++;
+            }
+            else if( my_cloud.cloud_2d[i][0] > -250 &&  my_cloud.cloud_2d[i][0] <= 0){
+                if(distance[4]>my_cloud.cloud_2d[i][1])
+                    distance[4]=my_cloud.cloud_2d[i][1];
+                cout[4]++;
+            }
+            else if( my_cloud.cloud_2d[i][0] > 0    &&  my_cloud.cloud_2d[i][0] <= 250){
+                if(distance[3]>my_cloud.cloud_2d[i][1])
+                    distance[3]=my_cloud.cloud_2d[i][1];
+                cout[3]++;
+            }
+            else if( my_cloud.cloud_2d[i][0] > 250  &&  my_cloud.cloud_2d[i][0] <= 500){
+                if(distance[2]>my_cloud.cloud_2d[i][1])
+                    distance[2]=my_cloud.cloud_2d[i][1];
+                cout[2]++;
+            }
+            else if( my_cloud.cloud_2d[i][0] > 500  &&  my_cloud.cloud_2d[i][0] <= 750){
+                if(distance[1]>my_cloud.cloud_2d[i][1])
+                    distance[1]=my_cloud.cloud_2d[i][1];
+                cout[1]++;
+            }
+            else if( my_cloud.cloud_2d[i][0] > 750  &&  my_cloud.cloud_2d[i][0] <= 1000){
+                if(distance[0]>my_cloud.cloud_2d[i][1])
+                    distance[0]=my_cloud.cloud_2d[i][1];
+                cout[0]++;
+            }
+        }
+        for(int j=0;j<8;j++){
+            my_barrier.barrier[j][0]=distance[j];
+            my_barrier.barrier[j][1]=cout[j];
+        }
+        barrier_data.store(my_barrier,std::memory_order_relaxed);
+
+        auto end_time   = std::chrono::system_clock::now();
+        auto elapse_time  = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
+        if(period < elapse_time){
+            std::this_thread::sleep_for(period-elapse_time);
         }
     }
     return false;

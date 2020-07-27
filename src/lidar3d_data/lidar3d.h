@@ -47,6 +47,13 @@ struct Cloud_Filtered_data{
     int cloud_2d[19200][2];
 };
 
+struct Barrier_data{
+    int size_t;
+    double time_stamp;
+    //[i][0]:min distance;[i][1]:cout
+    int barrier[8][2];
+};
+
 class Lidar3d{
 public:
     Lidar3d(){};
@@ -59,6 +66,7 @@ public:
 public:
     std::atomic<Lidar_hps_data> hps_data;
     std::atomic<Cloud_Filtered_data> cloud_filtered_data;
+    std::atomic<Barrier_data> barrier_data;
 
 private:
     HPS3D_HandleTypeDef handle_lidar3d[DEV_NUM];
@@ -69,6 +77,9 @@ private:
 
     std::thread compute_thread_;
     bool compute_func();
+
+    std::thread barrier_thread_;
+    bool barrier_func();
 
     std::thread display_thread_;
     bool display_func();

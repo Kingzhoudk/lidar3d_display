@@ -1,5 +1,7 @@
 #include "src/lidar3d_data/lidar3d.h"
 
+bool Ugv_System_Error=false;
+
 int main(){
     /*
     // AngleAxisd 旋转向量，沿z轴顺时针旋转
@@ -14,6 +16,6 @@ int main(){
     lidar.init();
 
     while(true){
-        sleep(1);
+        sleep(10);
     }
 }
