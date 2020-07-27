@@ -229,13 +229,11 @@ bool Lidar3d::display_func() {
     //****
     int a=1;
 
-    Lidar_hps_data my_data;
     Cloud_Filtered_data my_cloud;
     Barrier_data my_barrier;
 
     while(a){
         std::cout<<"start read data"<<"\n";
-        my_data=hps_data.load(std::memory_order_relaxed);
         my_cloud=cloud_filtered_data.load(std::memory_order_relaxed);
         my_barrier=barrier_data.load(std::memory_order_relaxed);
         std::cout<<"end read data"<<"\n";
