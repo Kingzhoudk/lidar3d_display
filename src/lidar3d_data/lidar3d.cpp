@@ -63,7 +63,7 @@ bool Lidar3d::lidar_thread_func() {
 
     Lidar_hps_data my_data;
     // 1 or 2
-    if(HPS3D_GetMultiCameraCode(&handle_lidar3d[0])==1){
+    if(HPS3D_GetMultiCameraCode(&handle_lidar3d[0])==10){
         my_data.lidar_1_id=0;
         my_data.lidar_2_id=1;
     }

@@ -59,7 +59,7 @@ public:
     Lidar3d(){};
     ~Lidar3d() = default;
 
-    double installation_heght = 300 ;
+    double installation_heght = 400 ;
 
     bool init();
 
