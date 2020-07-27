@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/bill/桌面/lidar3d_display
+CMAKE_SOURCE_DIR = /home/uisee/Desktop/lidar3d_display
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/bill/桌面/lidar3d_display/cmake-build-debug
+CMAKE_BINARY_DIR = /home/uisee/Desktop/lidar3d_display/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/lidar3d.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/lidar3d.dir/flags.make
 
 CMakeFiles/lidar3d.dir/src/lidar3d_data/lidar3d.cpp.o: CMakeFiles/lidar3d.dir/flags.make
 CMakeFiles/lidar3d.dir/src/lidar3d_data/lidar3d.cpp.o: ../src/lidar3d_data/lidar3d.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bill/桌面/lidar3d_display/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/lidar3d.dir/src/lidar3d_data/lidar3d.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lidar3d.dir/src/lidar3d_data/lidar3d.cpp.o -c /home/bill/桌面/lidar3d_display/src/lidar3d_data/lidar3d.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/uisee/Desktop/lidar3d_display/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/lidar3d.dir/src/lidar3d_data/lidar3d.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lidar3d.dir/src/lidar3d_data/lidar3d.cpp.o -c /home/uisee/Desktop/lidar3d_display/src/lidar3d_data/lidar3d.cpp
 
 CMakeFiles/lidar3d.dir/src/lidar3d_data/lidar3d.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/lidar3d.dir/src/lidar3d_data/lidar3d.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/bill/桌面/lidar3d_display/src/lidar3d_data/lidar3d.cpp > CMakeFiles/lidar3d.dir/src/lidar3d_data/lidar3d.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/uisee/Desktop/lidar3d_display/src/lidar3d_data/lidar3d.cpp > CMakeFiles/lidar3d.dir/src/lidar3d_data/lidar3d.cpp.i
 
 CMakeFiles/lidar3d.dir/src/lidar3d_data/lidar3d.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/lidar3d.dir/src/lidar3d_data/lidar3d.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/bill/桌面/lidar3d_display/src/lidar3d_data/lidar3d.cpp -o CMakeFiles/lidar3d.dir/src/lidar3d_data/lidar3d.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/uisee/Desktop/lidar3d_display/src/lidar3d_data/lidar3d.cpp -o CMakeFiles/lidar3d.dir/src/lidar3d_data/lidar3d.cpp.s
 
 CMakeFiles/lidar3d.dir/src/lidar3d_data/lidar3d.cpp.o.requires:
 
@@ -83,16 +83,16 @@ CMakeFiles/lidar3d.dir/src/lidar3d_data/lidar3d.cpp.o.provides.build: CMakeFiles
 
 CMakeFiles/lidar3d.dir/main.cpp.o: CMakeFiles/lidar3d.dir/flags.make
 CMakeFiles/lidar3d.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bill/桌面/lidar3d_display/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/lidar3d.dir/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lidar3d.dir/main.cpp.o -c /home/bill/桌面/lidar3d_display/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/uisee/Desktop/lidar3d_display/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/lidar3d.dir/main.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lidar3d.dir/main.cpp.o -c /home/uisee/Desktop/lidar3d_display/main.cpp
 
 CMakeFiles/lidar3d.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/lidar3d.dir/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/bill/桌面/lidar3d_display/main.cpp > CMakeFiles/lidar3d.dir/main.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/uisee/Desktop/lidar3d_display/main.cpp > CMakeFiles/lidar3d.dir/main.cpp.i
 
 CMakeFiles/lidar3d.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/lidar3d.dir/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/bill/桌面/lidar3d_display/main.cpp -o CMakeFiles/lidar3d.dir/main.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/uisee/Desktop/lidar3d_display/main.cpp -o CMakeFiles/lidar3d.dir/main.cpp.s
 
 CMakeFiles/lidar3d.dir/main.cpp.o.requires:
 
@@ -107,16 +107,16 @@ CMakeFiles/lidar3d.dir/main.cpp.o.provides.build: CMakeFiles/lidar3d.dir/main.cp
 
 CMakeFiles/lidar3d.dir/src/system/display.cpp.o: CMakeFiles/lidar3d.dir/flags.make
 CMakeFiles/lidar3d.dir/src/system/display.cpp.o: ../src/system/display.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/bill/桌面/lidar3d_display/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/lidar3d.dir/src/system/display.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lidar3d.dir/src/system/display.cpp.o -c /home/bill/桌面/lidar3d_display/src/system/display.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/uisee/Desktop/lidar3d_display/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/lidar3d.dir/src/system/display.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/lidar3d.dir/src/system/display.cpp.o -c /home/uisee/Desktop/lidar3d_display/src/system/display.cpp
 
 CMakeFiles/lidar3d.dir/src/system/display.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/lidar3d.dir/src/system/display.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/bill/桌面/lidar3d_display/src/system/display.cpp > CMakeFiles/lidar3d.dir/src/system/display.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/uisee/Desktop/lidar3d_display/src/system/display.cpp > CMakeFiles/lidar3d.dir/src/system/display.cpp.i
 
 CMakeFiles/lidar3d.dir/src/system/display.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/lidar3d.dir/src/system/display.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/bill/桌面/lidar3d_display/src/system/display.cpp -o CMakeFiles/lidar3d.dir/src/system/display.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/uisee/Desktop/lidar3d_display/src/system/display.cpp -o CMakeFiles/lidar3d.dir/src/system/display.cpp.s
 
 CMakeFiles/lidar3d.dir/src/system/display.cpp.o.requires:
 
@@ -142,21 +142,18 @@ lidar3d: CMakeFiles/lidar3d.dir/src/lidar3d_data/lidar3d.cpp.o
 lidar3d: CMakeFiles/lidar3d.dir/main.cpp.o
 lidar3d: CMakeFiles/lidar3d.dir/src/system/display.cpp.o
 lidar3d: CMakeFiles/lidar3d.dir/build.make
-lidar3d: /usr/lib/x86_64-linux-gnu/libopencv_videostab.so.2.4.9
-lidar3d: /usr/lib/x86_64-linux-gnu/libopencv_ts.so.2.4.9
-lidar3d: /usr/lib/x86_64-linux-gnu/libopencv_superres.so.2.4.9
-lidar3d: /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.2.4.9
-lidar3d: /usr/lib/x86_64-linux-gnu/libopencv_ocl.so.2.4.9
-lidar3d: /usr/lib/x86_64-linux-gnu/libopencv_gpu.so.2.4.9
-lidar3d: /usr/lib/x86_64-linux-gnu/libopencv_contrib.so.2.4.9
+lidar3d: /usr/local/lib/libopencv_shape.so.3.2.0
+lidar3d: /usr/local/lib/libopencv_stitching.so.3.2.0
+lidar3d: /usr/local/lib/libopencv_superres.so.3.2.0
+lidar3d: /usr/local/lib/libopencv_videostab.so.3.2.0
 lidar3d: /usr/lib/x86_64-linux-gnu/libprotobuf.so
 lidar3d: /usr/local/lib/libpangolin.so
-lidar3d: /usr/lib/libpcl_keypoints.so
 lidar3d: /usr/lib/libpcl_segmentation.so
-lidar3d: /usr/lib/libpcl_stereo.so
 lidar3d: /usr/lib/libpcl_surface.so
 lidar3d: /usr/lib/libpcl_recognition.so
+lidar3d: /usr/lib/libpcl_keypoints.so
 lidar3d: /usr/lib/libpcl_tracking.so
+lidar3d: /usr/lib/libpcl_stereo.so
 lidar3d: /usr/lib/x86_64-linux-gnu/libboost_system.so
 lidar3d: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
 lidar3d: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
@@ -164,29 +161,22 @@ lidar3d: /usr/lib/x86_64-linux-gnu/libboost_iostreams.so
 lidar3d: /usr/lib/x86_64-linux-gnu/libboost_serialization.so
 lidar3d: /usr/lib/x86_64-linux-gnu/libboost_regex.so
 lidar3d: /usr/lib/x86_64-linux-gnu/libqhull.so
-lidar3d: /usr/lib/libvtkGenericFiltering.so.5.10.1
-lidar3d: /usr/lib/libvtkGeovis.so.5.10.1
-lidar3d: /usr/lib/libvtkCharts.so.5.10.1
 lidar3d: /usr/lib/x86_64-linux-gnu/libflann_cpp.so
-lidar3d: /usr/lib/x86_64-linux-gnu/libopencv_photo.so.2.4.9
-lidar3d: /usr/lib/x86_64-linux-gnu/libopencv_legacy.so.2.4.9
-lidar3d: /usr/lib/x86_64-linux-gnu/libopencv_video.so.2.4.9
-lidar3d: /usr/lib/x86_64-linux-gnu/libopencv_objdetect.so.2.4.9
-lidar3d: /usr/lib/x86_64-linux-gnu/libopencv_ml.so.2.4.9
-lidar3d: /usr/lib/x86_64-linux-gnu/libopencv_calib3d.so.2.4.9
-lidar3d: /usr/lib/x86_64-linux-gnu/libopencv_features2d.so.2.4.9
-lidar3d: /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.2.4.9
-lidar3d: /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.2.4.9
-lidar3d: /usr/lib/x86_64-linux-gnu/libopencv_flann.so.2.4.9
-lidar3d: /usr/lib/x86_64-linux-gnu/libopencv_core.so.2.4.9
+lidar3d: /usr/local/lib/libopencv_objdetect.so.3.2.0
+lidar3d: /usr/local/lib/libopencv_calib3d.so.3.2.0
+lidar3d: /usr/local/lib/libopencv_features2d.so.3.2.0
+lidar3d: /usr/local/lib/libopencv_flann.so.3.2.0
+lidar3d: /usr/local/lib/libopencv_highgui.so.3.2.0
+lidar3d: /usr/local/lib/libopencv_ml.so.3.2.0
+lidar3d: /usr/local/lib/libopencv_photo.so.3.2.0
+lidar3d: /usr/local/lib/libopencv_video.so.3.2.0
+lidar3d: /usr/local/lib/libopencv_videoio.so.3.2.0
+lidar3d: /usr/local/lib/libopencv_imgcodecs.so.3.2.0
+lidar3d: /usr/local/lib/libopencv_imgproc.so.3.2.0
+lidar3d: /usr/local/lib/libopencv_core.so.3.2.0
 lidar3d: /usr/lib/x86_64-linux-gnu/libGLU.so
 lidar3d: /usr/lib/x86_64-linux-gnu/libGL.so
 lidar3d: /usr/lib/x86_64-linux-gnu/libGLEW.so
-lidar3d: /usr/lib/x86_64-linux-gnu/libwayland-client.so
-lidar3d: /usr/lib/x86_64-linux-gnu/libwayland-egl.so
-lidar3d: /usr/lib/x86_64-linux-gnu/libwayland-cursor.so
-lidar3d: /usr/lib/x86_64-linux-gnu/libSM.so
-lidar3d: /usr/lib/x86_64-linux-gnu/libICE.so
 lidar3d: /usr/lib/x86_64-linux-gnu/libX11.so
 lidar3d: /usr/lib/x86_64-linux-gnu/libXext.so
 lidar3d: /usr/lib/x86_64-linux-gnu/libdc1394.so
@@ -200,31 +190,18 @@ lidar3d: /usr/lib/x86_64-linux-gnu/libz.so
 lidar3d: /usr/lib/x86_64-linux-gnu/libjpeg.so
 lidar3d: /usr/lib/x86_64-linux-gnu/libtiff.so
 lidar3d: /usr/lib/x86_64-linux-gnu/libIlmImf.so
-lidar3d: /usr/lib/libpcl_io.so
 lidar3d: /usr/lib/libpcl_ml.so
 lidar3d: /usr/lib/libpcl_registration.so
 lidar3d: /usr/lib/libpcl_features.so
 lidar3d: /usr/lib/libpcl_filters.so
 lidar3d: /usr/lib/libpcl_sample_consensus.so
 lidar3d: /usr/lib/libpcl_search.so
-lidar3d: /usr/lib/libpcl_octree.so
 lidar3d: /usr/lib/libpcl_kdtree.so
+lidar3d: /usr/lib/libpcl_io.so
+lidar3d: /usr/lib/libpcl_octree.so
 lidar3d: /usr/lib/libpcl_common.so
-lidar3d: /usr/lib/libvtkViews.so.5.10.1
-lidar3d: /usr/lib/libvtkInfovis.so.5.10.1
-lidar3d: /usr/lib/libvtkWidgets.so.5.10.1
-lidar3d: /usr/lib/libvtkVolumeRendering.so.5.10.1
-lidar3d: /usr/lib/libvtkHybrid.so.5.10.1
-lidar3d: /usr/lib/libvtkParallel.so.5.10.1
-lidar3d: /usr/lib/libvtkRendering.so.5.10.1
-lidar3d: /usr/lib/libvtkImaging.so.5.10.1
-lidar3d: /usr/lib/libvtkGraphics.so.5.10.1
-lidar3d: /usr/lib/libvtkIO.so.5.10.1
-lidar3d: /usr/lib/libvtkFiltering.so.5.10.1
-lidar3d: /usr/lib/libvtkCommon.so.5.10.1
-lidar3d: /usr/lib/libvtksys.so.5.10.1
 lidar3d: CMakeFiles/lidar3d.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/bill/桌面/lidar3d_display/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable lidar3d"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/uisee/Desktop/lidar3d_display/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable lidar3d"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/lidar3d.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -243,6 +220,6 @@ CMakeFiles/lidar3d.dir/clean:
 .PHONY : CMakeFiles/lidar3d.dir/clean
 
 CMakeFiles/lidar3d.dir/depend:
-	cd /home/bill/桌面/lidar3d_display/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/bill/桌面/lidar3d_display /home/bill/桌面/lidar3d_display /home/bill/桌面/lidar3d_display/cmake-build-debug /home/bill/桌面/lidar3d_display/cmake-build-debug /home/bill/桌面/lidar3d_display/cmake-build-debug/CMakeFiles/lidar3d.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/uisee/Desktop/lidar3d_display/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/uisee/Desktop/lidar3d_display /home/uisee/Desktop/lidar3d_display /home/uisee/Desktop/lidar3d_display/cmake-build-debug /home/uisee/Desktop/lidar3d_display/cmake-build-debug /home/uisee/Desktop/lidar3d_display/cmake-build-debug/CMakeFiles/lidar3d.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/lidar3d.dir/depend
 

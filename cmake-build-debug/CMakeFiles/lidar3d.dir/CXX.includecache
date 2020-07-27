@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/bill/桌面/lidar3d_display/main.cpp
+/home/uisee/Desktop/lidar3d_display/main.cpp
 src/lidar3d_data/lidar3d.h
-/home/bill/桌面/lidar3d_display/src/lidar3d_data/lidar3d.h
+/home/uisee/Desktop/lidar3d_display/src/lidar3d_data/lidar3d.h
 
-/home/bill/桌面/lidar3d_display/src/lidar3d_data/api.h
+/home/uisee/Desktop/lidar3d_display/src/lidar3d_data/api.h
 stdbool.h
 -
 string.h
@@ -24,11 +24,11 @@ sys/socket.h
 netinet/in.h
 -
 
-/home/bill/桌面/lidar3d_display/src/lidar3d_data/lidar3d.cpp
+/home/uisee/Desktop/lidar3d_display/src/lidar3d_data/lidar3d.cpp
 lidar3d.h
-/home/bill/桌面/lidar3d_display/src/lidar3d_data/lidar3d.h
+/home/uisee/Desktop/lidar3d_display/src/lidar3d_data/lidar3d.h
 
-/home/bill/桌面/lidar3d_display/src/lidar3d_data/lidar3d.h
+/home/uisee/Desktop/lidar3d_display/src/lidar3d_data/lidar3d.h
 stdio.h
 -
 string.h
@@ -72,15 +72,15 @@ pcl-1.11/pcl/point_types.h
 pcl/filters/statistical_outlier_removal.h
 -
 api.h
-/home/bill/桌面/lidar3d_display/src/lidar3d_data/api.h
+/home/uisee/Desktop/lidar3d_display/src/lidar3d_data/api.h
 
-/home/bill/桌面/lidar3d_display/src/system/display.cpp
+/home/uisee/Desktop/lidar3d_display/src/system/display.cpp
 zconf.h
 -
 display.h
-/home/bill/桌面/lidar3d_display/src/system/display.h
+/home/uisee/Desktop/lidar3d_display/src/system/display.h
 
-/home/bill/桌面/lidar3d_display/src/system/display.h
+/home/uisee/Desktop/lidar3d_display/src/system/display.h
 atomic
 -
 iostream

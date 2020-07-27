@@ -62,8 +62,8 @@ bool Lidar3d::lidar_thread_func() {
     }while(a==0);
 
     Lidar_hps_data my_data;
-    // 1 or 2
-    if(HPS3D_GetMultiCameraCode(&handle_lidar3d[0])==10){
+    // 15 or 10 id
+    if(HPS3D_GetMultiCameraCode(&handle_lidar3d[0])==15){
         my_data.lidar_1_id=0;
         my_data.lidar_2_id=1;
     }
@@ -251,9 +251,9 @@ bool Lidar3d::display_func() {
             //清除屏幕并激活要渲染到的视图
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             d_cam.Activate(s_cam);
-            // pangolin::glDrawColouredCube();//画三维方块
+            pangolin::glDrawColouredCube();//画三维方块
             // 线条长度
-            // pangolin::glDrawAxis(2);//三维坐标轴，红——x轴，绿——y轴，蓝——z轴
+            pangolin::glDrawAxis(2);//三维坐标轴，红——x轴，绿——y轴，蓝——z轴
 
             for (int i = 0; i < my_cloud.size_t ; i++) {
                 // 画map

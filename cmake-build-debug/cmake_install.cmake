@@ -1,4 +1,4 @@
-# Install script for directory: /home/bill/桌面/lidar3d_display
+# Install script for directory: /home/uisee/Desktop/lidar3d_display
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/bill/桌面/lidar3d_display/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/uisee/Desktop/lidar3d_display/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
