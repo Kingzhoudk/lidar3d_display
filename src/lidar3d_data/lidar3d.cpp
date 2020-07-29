@@ -156,44 +156,44 @@ bool Lidar3d::compute_func() {
         my_cloud=cloud_filtered_data.load(std::memory_order_relaxed);
         for(int i=0;i<my_cloud.size_t;i++){
             if( my_cloud.cloud_2d[i][0] > -1000&&  my_cloud.cloud_2d[i][0] <= -750){
-                if(distance[7]>my_cloud.cloud_2d[i][1])
-                    distance[7]=my_cloud.cloud_2d[i][1];
-                dis_cout[7]++;
+                if(distance[0]>my_cloud.cloud_2d[i][1])
+                    distance[0]=my_cloud.cloud_2d[i][1];
+                dis_cout[0]++;
             }
             else if( my_cloud.cloud_2d[i][0] > -750 &&  my_cloud.cloud_2d[i][0] <= -500){
-                if(distance[6]>my_cloud.cloud_2d[i][1])
-                    distance[6]=my_cloud.cloud_2d[i][1];
-                dis_cout[6]++;
-            }
-            else if( my_cloud.cloud_2d[i][0] > -500 &&  my_cloud.cloud_2d[i][0] <= -250){
-                if(distance[5]>my_cloud.cloud_2d[i][1])
-                    distance[5]=my_cloud.cloud_2d[i][1];
-                dis_cout[5]++;
-            }
-            else if( my_cloud.cloud_2d[i][0] > -250 &&  my_cloud.cloud_2d[i][0] <= 0){
-                if(distance[4]>my_cloud.cloud_2d[i][1])
-                    distance[4]=my_cloud.cloud_2d[i][1];
-                dis_cout[4]++;
-            }
-            else if( my_cloud.cloud_2d[i][0] > 0    &&  my_cloud.cloud_2d[i][0] <= 250){
-                if(distance[3]>my_cloud.cloud_2d[i][1])
-                    distance[3]=my_cloud.cloud_2d[i][1];
-                dis_cout[3]++;
-            }
-            else if( my_cloud.cloud_2d[i][0] > 250  &&  my_cloud.cloud_2d[i][0] <= 500){
-                if(distance[2]>my_cloud.cloud_2d[i][1])
-                    distance[2]=my_cloud.cloud_2d[i][1];
-                dis_cout[2]++;
-            }
-            else if( my_cloud.cloud_2d[i][0] > 500  &&  my_cloud.cloud_2d[i][0] <= 750){
                 if(distance[1]>my_cloud.cloud_2d[i][1])
                     distance[1]=my_cloud.cloud_2d[i][1];
                 dis_cout[1]++;
             }
+            else if( my_cloud.cloud_2d[i][0] > -500 &&  my_cloud.cloud_2d[i][0] <= -250){
+                if(distance[2]>my_cloud.cloud_2d[i][1])
+                    distance[2]=my_cloud.cloud_2d[i][1];
+                dis_cout[2]++;
+            }
+            else if( my_cloud.cloud_2d[i][0] > -250 &&  my_cloud.cloud_2d[i][0] <= 0){
+                if(distance[3]>my_cloud.cloud_2d[i][1])
+                    distance[3]=my_cloud.cloud_2d[i][1];
+                dis_cout[3]++;
+            }
+            else if( my_cloud.cloud_2d[i][0] > 0    &&  my_cloud.cloud_2d[i][0] <= 250){
+                if(distance[4]>my_cloud.cloud_2d[i][1])
+                    distance[4]=my_cloud.cloud_2d[i][1];
+                dis_cout[4]++;
+            }
+            else if( my_cloud.cloud_2d[i][0] > 250  &&  my_cloud.cloud_2d[i][0] <= 500){
+                if(distance[5]>my_cloud.cloud_2d[i][1])
+                    distance[5]=my_cloud.cloud_2d[i][1];
+                dis_cout[5]++;
+            }
+            else if( my_cloud.cloud_2d[i][0] > 500  &&  my_cloud.cloud_2d[i][0] <= 750){
+                if(distance[6]>my_cloud.cloud_2d[i][1])
+                    distance[6]=my_cloud.cloud_2d[i][1];
+                dis_cout[6]++;
+            }
             else if( my_cloud.cloud_2d[i][0] > 750  &&  my_cloud.cloud_2d[i][0] <= 1000){
-                if(distance[0]>my_cloud.cloud_2d[i][1])
-                    distance[0]=my_cloud.cloud_2d[i][1];
-                dis_cout[0]++;
+                if(distance[7]>my_cloud.cloud_2d[i][1])
+                    distance[7]=my_cloud.cloud_2d[i][1];
+                dis_cout[7]++;
             }
         }
         for(int j=0;j<8;j++){

@@ -23,9 +23,6 @@
 #include <eigen3/Eigen/Dense>
 #include <eigen3/Eigen/Core>
 #include <eigen3/Eigen/Geometry>
-#include <pcl-1.11/pcl/point_cloud.h>
-#include <pcl-1.11/pcl/point_types.h>
-#include <pcl/filters/statistical_outlier_removal.h>
 
 #include "api.h"
 
@@ -59,7 +56,7 @@ public:
     Lidar3d(){};
     ~Lidar3d() = default;
 
-    double installation_heght = 480 ;
+    double installation_heght = 460 ;
 
     bool init();
 
