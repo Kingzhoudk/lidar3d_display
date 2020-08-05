@@ -72,6 +72,7 @@ bool Lidar3d::lidar_thread_func() {
         my_data.lidar_2_id=0;
     }
 
+    std::ofstream OutFile("0803roadmap.txt", std::ios::trunc);
     while(a==1) {
         if(HPS3D_SingleMeasurement(&handle_lidar3d[0]) != RET_OK || HPS3D_SingleMeasurement(&handle_lidar3d[1]) != RET_OK){
             std::cout<<"error!";
@@ -83,11 +84,18 @@ bool Lidar3d::lidar_thread_func() {
             my_data.lidar_data_1[i][0] = handle_lidar3d[my_data.lidar_1_id].MeasureData.point_cloud_data->point_data[i].x;
             my_data.lidar_data_1[i][1] = handle_lidar3d[my_data.lidar_1_id].MeasureData.point_cloud_data->point_data[i].y;
             my_data.lidar_data_1[i][2] = handle_lidar3d[my_data.lidar_1_id].MeasureData.point_cloud_data->point_data[i].z;
+            std::ofstream OutFile("0803roadmap.txt", std::ios::app);
+            OutFile <<my_data.lidar_data_1[i][0]<< ',' << my_data.lidar_data_1[i][1] << ',' << my_data.lidar_data_1[i][2]<<"\n";
+            OutFile.close();
 
             my_data.lidar_data_2[i][0] = handle_lidar3d[my_data.lidar_2_id].MeasureData.point_cloud_data->point_data[i].x;
             my_data.lidar_data_2[i][1] = handle_lidar3d[my_data.lidar_2_id].MeasureData.point_cloud_data->point_data[i].y;
             my_data.lidar_data_2[i][2] = handle_lidar3d[my_data.lidar_2_id].MeasureData.point_cloud_data->point_data[i].z;
+
         }
+        std::ofstream OutFile("0803roadmap.txt", std::ios::app);
+        OutFile <<"\n\n";
+        OutFile.close();
         my_data.time_stamp = get_machine_timestamp_s();
         hps_data.store(my_data, std::memory_order_relaxed);
     }
